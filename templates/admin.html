@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<form method="POST" action="{{ url_for('update_duration') }}" class="mb-4">
+  <label>Quiz Duration (in minutes):</label>
+  <input type="number" name="quiz_duration" value="{{ duration }}" min="1" max="180" class="form-control" style="width: 150px; display: inline-block;"/>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+<div class="list-group">
+  <a href="{{ url_for('manage_subjects') }}" class="list-group-item list-group-item-action">Manage Subjects</a>
+  <a href="{{ url_for('manage_users') }}" class="list-group-item list-group-item-action">Manage Users</a>
+  <a href="{{ url_for('quiz_analytics') }}" class="list-group-item list-group-item-action">View Analytics</a>
+</div>
+{% endblock %}

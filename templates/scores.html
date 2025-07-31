@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}My Quiz Scores{% endblock %}
+
+{% block content %}
+<h2>My Quiz Scores</h2>
+{% if scores %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Chapter</th>
+            <th>Quiz</th>
+            <th>Score</th>
+            <th>Total Questions</th>
+            <th>Date Taken</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for score in scores %}
+        <tr>
+            <td>{{ score['subject_name'] or 'N/A' }}</td>
+            <td>{{ score['chapter_name'] or 'N/A' }}</td>
+            <td>{{ score['quiz_name'] or 'N/A' }}</td>
+            <td>{{ score['score'] }}</td>
+            <td>{{ score['total'] }}</td>
+            <td>{{ score['timestamp'] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You have not taken any quizzes yet.</p>
+{% endif %}
+<a href="{{ url_for('user_console') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

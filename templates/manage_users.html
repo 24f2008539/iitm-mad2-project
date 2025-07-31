@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<h2>Manage Users</h2>
+
+<form method="GET" class="mb-3 d-flex gap-2">
+  <input type="text" name="search" placeholder="Search users by username" value="{{ search_query }}" class="form-control" />
+  <button type="submit" class="btn btn-secondary">Search</button>
+  <a href="{{ url_for('manage_users') }}" class="btn btn-outline-secondary">Clear</a>
+</form>
+
+<table class="table table-bordered">
+  <thead><tr><th>Username</th><th>Full Name</th><th>Qualification</th><th>DOB</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user['username'] }}</td>
+      <td>{{ user['full_name'] }}</td>
+      <td>{{ user['qualification'] }}</td>
+      <td>{{ user['dob'] }}</td>
+      <td>
+        <a href="{{ url_for('delete_user', user_id=user['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this user?')">Delete</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No users found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
